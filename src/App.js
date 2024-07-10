@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from "react";
+import BlogForm from "./Components/BlogForm";
+import BlogPost from "./Components/BlogPost";
 
-function App() {
+function App (){
+  
+  const [posts,setposts]=useState([]);
+
+  const addPost=(post)=>{
+     return setposts([post, ...posts])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Lets get started</h1>
+      <BlogForm addPost={addPost}></BlogForm>
+      <div>
+        {posts.map((post,index)=>{
+          return(<BlogPost key={index}  post={post}/>)
+        })}
+      </div>
     </div>
   );
 }
